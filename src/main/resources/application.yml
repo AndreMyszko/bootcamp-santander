@@ -1,0 +1,4 @@
+server:
+    port: 8085 #tomcat port
+    servlet:
+        context-path: /bootcamp #initial URI path
