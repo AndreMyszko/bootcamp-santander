@@ -1,5 +1,6 @@
 package com.project.bootcamp;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,9 +17,9 @@ public class BootcampApplication {
 	}
 
 	@Bean //adding swagger to api documentation -> usage: .../swagger-ui.html
-	public OpenAPI customOpenAPI(){
+	public OpenAPI customOpenAPI(@Value("${application.description}") String description){
 		return new OpenAPI().info(new Info()
-			.title("")
+			.title(description)
 			.version("1.0")
 			.termsOfService("http://swagger.io/terms")
 			.license(new License().name("Apache 2.0").url("http://springdoc.org")));

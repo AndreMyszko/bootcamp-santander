@@ -17,3 +17,7 @@ spring:
         generate-ddl: true
         hibernate:
             ddl-auto: none
+
+#self creation project name
+application:
+    description: SantanderDIO - bootcamp
