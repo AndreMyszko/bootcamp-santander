@@ -1,5 +1,6 @@
 package com.project.bootcamp.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,9 +67,16 @@ public class StockService {
         return mapper.toDto(repository.findAll()); // JPA method findAll() // list traformation method to recive dto as list (CTRL+CLICK on toDto method to check)
     }
 
+    //FIND BY ID
     @Transactional(readOnly = true)
     public StockDTO findById(Long id) {
         return repository.findById(id).map(mapper::toDto).orElseThrow(NotFoundException::new); //throwing new instance of an exception class to receive return string
+    }
+
+    //FIND BY CURRENT DATE
+    @Transactional(readOnly = true)
+    public List<StockDTO> findByToday() {
+        return repository.findByToday(LocalDate.now()).map(mapper::toDto).orElseThrow(NotFoundException::new); //pass current date to repository
     }
 
 

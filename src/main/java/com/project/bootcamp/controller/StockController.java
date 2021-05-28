@@ -59,4 +59,10 @@ public class StockController {
         return ResponseEntity.ok(service.delete(id));
     }
 
+    //FIND BY CURRENT DATE
+    @GetMapping(value = "/today", produces = MediaType.APPLICATION_JSON_VALUE) //  .../bootcamp/today
+    public ResponseEntity<List<StockDTO>> findByToday(){
+        return ResponseEntity.ok(service.findByToday());
+    }
+
 }
