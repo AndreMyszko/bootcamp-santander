@@ -37,6 +37,18 @@ public class StockService {
         repository.save(stock); //saving repository obj
         return mapper.toDto(stock); //returning dto to controller -> returning DTO already have ID!!
     }
+
+    @Transactional
+    public StockDTO update(StockDTO dto) {
+        Optional<Stock> optionalStock = repository.findByStockUpdate(dto.getName(), dto.getDate(), dto.getId()); //id check data integrity for update (only one) (SQL: <> = different)
+        if(optionalStock.isPresent()){
+            throw new BusinessException(MessageUtils.STOCK_ALREADY_EXISTIS);
+        }
+
+        Stock stock = mapper.toEntity(dto);
+        repository.save(stock);
+        return mapper.toDto(stock);
+    }
     
 
 }
