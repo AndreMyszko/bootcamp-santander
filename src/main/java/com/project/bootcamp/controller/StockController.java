@@ -40,18 +40,7 @@ public class StockController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE) //get, only send..
     public ResponseEntity<List<StockDTO>> findAll(){ //return all DTO list
-
-        //temporary list created for this part, it will change
-        List<StockDTO> list = new ArrayList<>(); 
-        StockDTO dto = new StockDTO();
-        dto.setId(1L);
-        dto.setName("SANTANDER DEV WEEK");
-        dto.setPrice(100D);
-        dto.setVariation(10D);
-        dto.setDate(LocalDate.now());
-        list.add(dto);
-
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)

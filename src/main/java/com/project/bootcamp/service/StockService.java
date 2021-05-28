@@ -1,9 +1,7 @@
 package com.project.bootcamp.service;
 
+import java.util.List;
 import java.util.Optional;
-
-import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import com.project.bootcamp.exceptions.BusinessException;
 import com.project.bootcamp.mapper.StockMapper;
@@ -14,6 +12,7 @@ import com.project.bootcamp.util.MessageUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service //service decides when call or not a repository when called by a controller *orchestrator
 public class StockService {
@@ -25,6 +24,7 @@ public class StockService {
     @Autowired
     private StockMapper mapper;
 
+    //INSERT
     @Transactional //open and close transaction -- garants rollback
     public StockDTO save(StockDTO dto) { //come DTO have no ID
         //\/ using exception handler \/
@@ -38,6 +38,7 @@ public class StockService {
         return mapper.toDto(stock); //returning dto to controller -> returning DTO already have ID!!
     }
 
+    //UPDATE
     @Transactional
     public StockDTO update(StockDTO dto) {
         Optional<Stock> optionalStock = repository.findByStockUpdate(dto.getName(), dto.getDate(), dto.getId()); //id check data integrity for update (only one) (SQL: <> = different)
@@ -47,7 +48,13 @@ public class StockService {
 
         Stock stock = mapper.toEntity(dto);
         repository.save(stock);
-        return mapper.toDto(stock);
+        return mapper.toDto(stock); //single dto return (CTRL+CLICK on toDto method to check)
+    }
+
+    //FIND ALL
+    @Transactional(readOnly = true)
+    public List<StockDTO> findAll() { //return a dto list to controller
+        return mapper.toDto(repository.findAll()); // JPA method findAll() // list traformation method to recive dto as list (CTRL+CLICK on toDto method to check)
     }
     
 
