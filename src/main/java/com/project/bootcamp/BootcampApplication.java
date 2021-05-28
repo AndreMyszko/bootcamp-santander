@@ -15,7 +15,7 @@ public class BootcampApplication {
 		SpringApplication.run(BootcampApplication.class, args);
 	}
 
-	@Bean
+	@Bean //adding swagger to api documentation -> usage: .../swagger-ui.html
 	public OpenAPI customOpenAPI(){
 		return new OpenAPI().info(new Info()
 			.title("")

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat; //jackson formatter
 
 //DATA TRANSFER OBJECT
-public class StockDTO {
+public class StockDTO { 
 
     //ATTRIBUTES
     private Long id;

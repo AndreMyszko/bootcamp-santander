@@ -7,7 +7,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.project.bootcamp.model.dto.StockDTO;
+import com.project.bootcamp.service.StockService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 //EndPoint
 @RestController
-@RequestMapping(value = "/stock")
+@RequestMapping(value = "/stock") //controller only knows DTO classes, never entity classes
 public class StockController {
+
+    @Autowired //open-close cycle
+    private StockService service; //Service connection
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE) // send and return JSON
     public ResponseEntity<StockDTO> save(@Valid @RequestBody StockDTO dto){ //@Valid to @NotNull on DTO class
-        return ResponseEntity.ok(dto); //send status 200OK and recive DTO just to run the project.
+        return ResponseEntity.ok(service.save(dto)); //send status 200OK and recive DTO just to run the project.
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
