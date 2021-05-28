@@ -51,7 +51,15 @@ public class StockService {
         repository.save(stock);
         return mapper.toDto(stock); //single dto return (CTRL+CLICK on toDto method to check)
     }
-
+    
+    //DELETE
+    @Transactional
+    public StockDTO delete(Long id) {
+        StockDTO dto = this.findById(id); //first verify if this.id is present on database -- findById already have exception tratament for NOT FOUND
+        repository.deleteById(dto.getId()); //delete register based on id
+        return dto;
+    }
+    
     //FIND ALL
     @Transactional(readOnly = true)
     public List<StockDTO> findAll() { //return a dto list to controller
@@ -62,6 +70,6 @@ public class StockService {
     public StockDTO findById(Long id) {
         return repository.findById(id).map(mapper::toDto).orElseThrow(NotFoundException::new); //throwing new instance of an exception class to receive return string
     }
-    
+
 
 }

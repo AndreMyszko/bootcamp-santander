@@ -36,6 +36,7 @@ public class StockMapper {
         return dto;
     }
 
+    //toDto overload
     public List<StockDTO> toDto(List<Stock> listStock) {
         //transformation
         return listStock.stream().map(this::toDto).collect(Collectors.toList()); //use toDto single return to transform the stream list
