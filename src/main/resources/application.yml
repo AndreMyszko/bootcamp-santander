@@ -4,12 +4,22 @@ server:
         context-path: /bootcamp #initial URI path
 
 #database connection (postgres)
+#LOCALHOST CONNECTION:
+#spring:
+#    datasource:
+#        driver-class-name: org.postgresql.Driver
+#        url: jdbc:postgresql://localhost:5432/postgres
+#        username: postgres
+#        password: 123456
+
+#HEROKU CONNECTION:
 spring:
     datasource:
         driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/postgres
-        username: postgres
-        password: 123456
+        url: postgres://tzwkknchraiabf:b024b0c33df8ee1d630a15b649fd8fd3a4351e782237359115204abaeb3f9439@ec2-35-170-85-206.compute-1.amazonaws.com:5432/ders6i6rhq82ka
+        username: tzwkknchraiabf
+        password: b024b0c33df8ee1d630a15b649fd8fd3a4351e782237359115204abaeb3f9439
+
     #JPA diretives    
     jpa:
         show-sql: true
